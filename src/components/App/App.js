@@ -1,27 +1,28 @@
-import React, { Component } from 'react';
-import './App.css';
-import { getUrls, postUrl } from '../../apiCalls';
-import UrlContainer from '../UrlContainer/UrlContainer';
-import UrlForm from '../UrlForm/UrlForm';
+import React, { Component } from "react";
+import "./App.css";
+import { getUrls, postUrl } from "../../apiCalls";
+import UrlContainer from "../UrlContainer/UrlContainer";
+import UrlForm from "../UrlForm/UrlForm";
 
 export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      urls: []
-    }
+      urls: [],
+    };
   }
 
   componentDidMount() {
-    getUrls().then(data => this.setState({urls: data.urls}))
+    getUrls().then((data) => this.setState({ urls: data.urls }));
   }
 
   updateUrl = (newUrl) => {
-    postUrl(newUrl)
-    getUrls().then(data => this.setState({urls: data.urls}))
-  }
+    postUrl(newUrl).then((data) =>
+      this.setState({ urls: [...this.state.urls, data] })
+    );
+    // postUrl(newUrl).then(data => console.log(data)
+  };
 
-  
   render() {
     return (
       <main className="App">
@@ -30,7 +31,7 @@ export class App extends Component {
           <UrlForm updateUrl={this.updateUrl} />
         </header>
 
-        <UrlContainer urls={this.state.urls}/>
+        {this.state.urls && <UrlContainer urls={this.state.urls} />}
       </main>
     );
   }
