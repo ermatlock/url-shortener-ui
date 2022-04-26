@@ -43,18 +43,18 @@ describe("url shortener", () => {
   })
 
   it("When a user fills out and submits the form, the new shortened URL is rendered", () =>{
-    cy.intercept("GET", "http://localhost:3001/api/v1/urls", {
-      statusCode: 200,
-      fixture: 'shortenedData.json'
-    }).as("matchedUrl")
+    // cy.intercept("GET", "http://localhost:3001/api/v1/urls", {
+    //   statusCode: 200,
+    //   fixture: 'shortenedData.json'
+    // }).as("matchedUrl")
     cy.visit("http://localhost:3000/")
     .get("input:first").type("Cool!").should("have.value", "Cool!")
     .get("input:last").type("https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch").should("have.value", "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch")
     .get("button").click()
-    cy.intercept("GET", "http://localhost:3001/api/v1/urls", {
-      statusCode: 200,
-      fixture: 'updatedData.json'
-    }).as("matchedUrl")
+    // cy.intercept("GET", "http://localhost:3001/api/v1/urls", {
+    //   statusCode: 200,
+    //   fixture: 'updatedData.json'
+    // }).as("matchedUrl")
     cy.visit("http://localhost:3000/")
     .get("#2").contains("Cool!")
     .get("#2 > a").contains("http://localhost:3001/useshorturl/2")
