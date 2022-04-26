@@ -2,9 +2,7 @@ import React from "react";
 import "./UrlContainer.css";
 
 const UrlContainer = (props) => {
-  // console.log("urlcontprops", props);
   const urlEls = props.urls.map((url) => {
-    // console.log(url.title)
     return (
       <div className="url">
         <h3>{url.title}</h3>
