@@ -16,4 +16,7 @@ export const postUrl = ({long_url, title}) => {
       title: title
     })
   })
+  .then(response => response.json())
+  // .then(response => console.log(response))
+
 }
