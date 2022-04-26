@@ -31,5 +31,15 @@ describe("url shortener", () => {
     .get("input:last").should("have.attr", "placeholder", "URL to Shorten...")
     .get("button").contains("Shorten Please!")
   })
+
+  it("When a user fills out the form, the information is reflected in the input fields", () =>{
+    cy.intercept("GET", "http://localhost:3001/api/v1/urls", {
+      statusCode: 200,
+      fixture: 'shortenedData.json'
+    }).as("matchedUrl")
+    cy.visit("http://localhost:3000/")
+    .get("input:first").type("Cool!").should("have.value", "Cool!")
+    .get("input:last").type("https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch").should("have.value", "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch")
+  })
   
 })
